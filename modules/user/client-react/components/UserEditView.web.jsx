@@ -31,7 +31,7 @@ const UserEditView = ({ loading, user, t, currentUser, onSubmit }) => {
         <div className="text-center">{t('userEdit.loadMsg')}</div>
       ) : (
         <>
-          <Link to={currentUser && currentUser.role === 'admin' ? '/users' : '/profile'}>Back</Link>
+          <Link to='/profile'>Back</Link>
           <h2>
             {t('userEdit.form.titleEdit')} {t('userEdit.form.title')}
           </h2>

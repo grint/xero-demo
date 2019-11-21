@@ -31,6 +31,6 @@ export default graphiqlExpress((req: express.Request) => {
   return {
     endpointURL: '/graphql',
     subscriptionsEndpoint: subscriptionsUrl,
-    query: '{\n' + '  serverCounter {\n' + '    amount\n' + '  }\n' + '}'
+    query: ''
   };
 });

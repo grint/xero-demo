@@ -6,9 +6,6 @@ export async function seed(knex, Promise) {
     'user',
     'user_profile',
     'auth_certificate',
-    'auth_facebook',
-    'auth_github',
-    'auth_linkedin'
   ]);
 
   const id = await returnId(knex('user')).insert({

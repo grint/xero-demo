@@ -1,0 +1,65 @@
+type Vendor {
+  id: Int!
+  vendorId: String!
+  name: String
+}
+
+type VendorEdges {
+  node: Vendor
+  cursor: Int
+}
+
+type VendorPageInfo {
+  endCursor: Int
+  hasNextPage: Boolean
+}
+
+type Vendors {
+  totalCount: Int
+  edges: [VendorEdges]
+  pageInfo: VendorPageInfo
+}
+
+extend type Query {
+  vendors(limit: Int, after: Int): Vendors
+  vendor(id: Int!): Vendor
+}
+
+extend type Subscription {
+  vendorsUpdated(endCursor: Int!): UpdateVendorsPayload
+}
+
+type UpdateVendorsPayload {
+  mutation: String!
+  vendors: Vendors
+}
+
+query GetVapi {
+    vapi {
+      name
+      vendoriId
+    }
+  }
+
+type Vapi {
+  vendoriId: String
+  name: String
+}
+
+extend type Query {
+  vapi: [Vapi]
+}
+
+input VendorsInput {
+    vendorId: String
+    name: String
+}
+
+fragment VendorInfo on Vendor {
+  vendoriId
+  name
+}
+
+extend type Mutation {
+   addVendors(vendors: [VendorsInput], date: String): [Vendor]
+}

@@ -1,0 +1,5 @@
+fragment VendorInfo on Vendor {
+  id
+  vendorId
+  name
+}

@@ -5,11 +5,9 @@ import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
-import ReactGA from 'react-ga';
 
 import { apiUrl, createApolloClient, createReduxStore, getStoreReducer, log } from '@gqlapp/core-common';
 import ClientModule from '@gqlapp/module-client-react';
-import settings from '@gqlapp/config';
 
 import RedBox from './RedBox';
 
@@ -41,19 +39,6 @@ export const onAppCreate = async (modules: ClientModule, entryModule: NodeModule
     ref.store = createReduxStore(ref.modules.reducers, {}, history, routerMiddleware(history));
   }
 };
-
-const logPageView = (location: any) => {
-  ReactGA.set({ page: location.pathname });
-  ReactGA.pageview(location.pathname);
-};
-
-if (!__TEST__) {
-  // Initialize Google Analytics and send events on each location change
-  ReactGA.initialize(settings.analytics.ga.trackingId);
-  logPageView(window.location);
-}
-
-history.listen(location => logPageView(location));
 
 export const onAppDispose = (_: any, data: any) => {
   data.store = ref.store;

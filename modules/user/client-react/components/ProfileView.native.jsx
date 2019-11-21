@@ -4,7 +4,6 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Platform } from '
 import * as WebBrowser from 'expo-web-browser';
 import PropTypes from 'prop-types';
 
-import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
 import { Card, CardItem, CardText, CardHeader, CardLabel, Loading, lookStyles } from '@gqlapp/look-client-react-native';
 import settings from '@gqlapp/config';
@@ -49,12 +48,6 @@ const ProfileView = ({ currentUserLoading, currentUser, navigation, t }) => {
               <CardHeader title={t('profile.headerText')} />
               {profileItems.map((item, idx) => renderProfileItem(item.label, item.value, idx))}
             </Card>
-          </View>
-          <View style={styles.cardWrapper}>
-            {/* Credit card info (Stripe subscription module)*/}
-            {settings.stripe.subscription.enabled &&
-              settings.stripe.subscription.publicKey &&
-              currentUser.role === 'user' && <StripeSubscriptionProfile />}
           </View>
           <TouchableOpacity
             style={styles.linkWrapper}

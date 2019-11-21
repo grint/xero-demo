@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 
-import { StripeSubscriptionProfile } from '@gqlapp/payments-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
 import { LayoutCenter, Card, CardGroup, CardTitle, CardText, PageLayout } from '@gqlapp/look-client-react';
 import settings from '@gqlapp/config';
@@ -55,10 +54,6 @@ const ProfileView = ({ currentUserLoading, currentUser, t }) => {
                 <CardText>{currentUser.profile.fullName}</CardText>
               </CardGroup>
             )}
-            {/* Credit card info (Stripe subscription module)*/}
-            {settings.stripe.subscription.enabled &&
-              settings.stripe.subscription.publicKey &&
-              currentUser.role === 'user' && <StripeSubscriptionProfile />}
           </Card>
           <Link className="mt-2 btn user-link" to={`/users/${currentUser.id}`}>
             {t('profile.editProfileText')}

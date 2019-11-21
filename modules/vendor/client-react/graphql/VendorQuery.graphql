@@ -1,0 +1,7 @@
+#import "./Vendor.graphql"
+
+query vendor($id: Int!) {
+  vendor(id: $id) {
+    ...VendorInfo
+  }
+}

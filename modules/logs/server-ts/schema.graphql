@@ -1,0 +1,55 @@
+# Log
+type Log {
+  id: Int!
+  operation: String!
+  state: String!
+  item: String!
+  records: Int!
+  success: Boolean!
+  error: String
+  created_at: String
+}
+
+type Logs {
+  totalCount: Int
+  edges: [LogsEdges]
+  pageInfo: LogsPageInfo
+}
+
+type LogsEdges {
+  node: Log
+  cursor: Int
+}
+
+type LogsPageInfo {
+  endCursor: Int
+  hasNextPage: Boolean
+}
+
+input LogInput {
+    operation: String!
+    state: String!
+    item: String!
+    records: Int!
+    success: Boolean!
+    error: String
+}
+
+
+extend type Mutation {
+  addLog(log: LogInput!): Log!
+}
+
+extend type Subscription {
+  logsUpdated(endCursor: Int!): UpdateLogsPayload
+}
+
+type UpdateLogsPayload {
+  mutation: String!
+  logs: [Log]
+}
+
+extend type Query {
+  log: [Log]
+  vendorLog: [Log]
+}

@@ -3,41 +3,18 @@ import PropTypes from 'prop-types';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { withFormik } from 'formik';
-
 import { isFormError, FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
 import { RenderField, Button, primary, FormView, lookStyles } from '@gqlapp/look-client-react-native';
 import { required, minLength, validate } from '@gqlapp/validation-common-react';
-import { LinkedInButton, GoogleButton, GitHubButton, FacebookButton } from '@gqlapp/authentication-client-react';
 import settings from '@gqlapp/config';
 
 const loginFormSchema = {
   usernameOrEmail: [required, minLength(3)],
   password: [required, minLength(settings.auth.password.minLength)]
 };
-const { github, facebook, linkedin, google } = settings.auth.social;
-
-const renderSocialButtons = (buttonsLength, t) => {
-  return buttonsLength > 2 ? (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-      {facebook.enabled && <FacebookButton text={t('login.fbBtn')} type="icon" />}
-      {google.enabled && <GoogleButton text={t('login.googleBtn')} type="icon" />}
-      {github.enabled && <GitHubButton text={t('login.githubBtn')} type="icon" />}
-      {linkedin.enabled && <LinkedInButton text={t('login.linkedinBtn')} type="icon" />}
-    </View>
-  ) : buttonsLength > 0 ? (
-    <View>
-      {facebook.enabled && <FacebookButton text={t('login.fbBtn')} type="button" />}
-      {google.enabled && <GoogleButton text={t('login.googleBtn')} type="button" />}
-      {github.enabled && <GitHubButton text={t('login.githubBtn')} type="button" />}
-      {linkedin.enabled && <LinkedInButton text={t('login.linkedinBtn')} type="button" />}
-    </View>
-  ) : null;
-};
 
 const LoginForm = ({ handleSubmit, valid, values, navigation, t }) => {
-  const buttonsLength = [facebook.enabled, linkedin.enabled, google.enabled, github.enabled].filter(button => button)
-    .length;
   return (
     <FormView contentContainerStyle={{ flexGrow: 1 }} style={styles.formView}>
       <View style={styles.formContainer}>
@@ -72,7 +49,6 @@ const LoginForm = ({ handleSubmit, valid, values, navigation, t }) => {
                 {t('login.form.btnSubmit')}
               </Button>
             </View>
-            {renderSocialButtons(buttonsLength, t)}
             <View style={styles.buttonsGroup}>
               <Text style={styles.signUpText} onPress={() => navigation.navigate('ForgotPassword')}>
                 {t('login.btn.forgotPass')}

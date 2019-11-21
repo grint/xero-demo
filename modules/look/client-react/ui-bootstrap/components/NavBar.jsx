@@ -17,16 +17,8 @@ const NavBar = () => (
         </NavLink>
         {ref.modules.navItems}
       </Nav>
-
       <Nav className="justify-content-end">
         {ref.modules.navItemsRight}
-        {__DEV__ && (
-          <NavItem>
-            <a href="/graphiql" className="nav-link">
-              GraphiQL
-            </a>
-          </NavItem>
-        )}
       </Nav>
     </Container>
   </Navbar>

@@ -1,0 +1,10 @@
+#import "./Vendor.graphql"
+
+subscription onVendorsUpdated($endCursor: Int!) {
+  vendorsUpdated(endCursor: $endCursor) {
+    mutation
+    node {
+      ...VendorInfo
+    }
+  }
+}

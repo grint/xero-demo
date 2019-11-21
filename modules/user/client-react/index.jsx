@@ -39,11 +39,6 @@ const LogoutLink = withRouter(
 export * from './containers/Auth';
 export { default as LOGIN } from './graphql/Login.graphql';
 
-const NavLinkUsersWithI18n = translate('user')(({ t }) => (
-  <NavLink to="/users" className="nav-link" activeClassName="active">
-    {t('navLink.users')}
-  </NavLink>
-));
 const NavLinkLoginWithI18n = translate('user')(({ t }) => (
   <NavLink to="/login" className="nav-link" activeClassName="active">
     {t('navLink.signIn')}
@@ -58,19 +53,6 @@ export default new ClientModule({
       role={['user', 'admin']}
       redirect="/login"
       component={loadable(() => import('./containers/Profile').then(c => c.default))}
-    />,
-    <AuthRoute
-      exact
-      path="/users"
-      redirect="/profile"
-      role="admin"
-      component={loadable(() => import('./containers/Users').then(c => c.default))}
-    />,
-    <AuthRoute
-      exact
-      path="/users/new"
-      role={['admin']}
-      component={loadable(() => import('./containers/UserAdd').then(c => c.default))}
     />,
     <AuthRoute
       path="/users/:id"
@@ -108,11 +90,6 @@ export default new ClientModule({
     />
   ],
   navItem: [
-    <IfLoggedIn key="/users" role="admin">
-      <MenuItem>
-        <NavLinkUsersWithI18n />
-      </MenuItem>
-    </IfLoggedIn>
   ],
   navItemRight: [
     <IfLoggedIn key="/profile">

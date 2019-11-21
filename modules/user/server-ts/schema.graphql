@@ -17,34 +17,10 @@ type UserProfile {
 # Additional authentication service info
 type UserAuth {
   certificate: CertificateAuth
-  facebook: FacebookAuth
-  google: GoogleAuth
-  github: GithubAuth
-  linkedin: LinkedInAuth
 }
 
 type CertificateAuth {
   serial: String
-}
-
-type FacebookAuth {
-  fbId: String
-  displayName: String
-}
-
-type GoogleAuth {
-  googleId: String
-  displayName: String
-}
-
-type GithubAuth {
-  ghId: String
-  displayName: String
-}
-
-type LinkedInAuth {
-  lnId: String
-  displayName: String
 }
 
 extend type Query {
@@ -90,34 +66,10 @@ input FilterUserInput {
 # Additional authentication service info
 input AuthInput {
   certificate: AuthCertificateInput
-  facebook: AuthFacebookInput
-  google: AuthGoogleInput
-  github: AuthGitHubInput
-  linkedin: AuthLinkedInInput
 }
 
 input AuthCertificateInput {
   serial: String
-}
-
-input AuthFacebookInput {
-  fbId: String
-  displayName: String
-}
-
-input AuthGoogleInput {
-  googleId: String
-  displayName: String
-}
-
-input AuthGitHubInput {
-  ghId: String
-  displayName: String
-}
-
-input AuthLinkedInInput {
-  lnId: String
-  displayName: String
 }
 
 # Input for addUser Mutation

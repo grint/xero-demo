@@ -2,73 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import { NavLink, Link } from 'react-router-dom';
-
 import { isFormError, FieldAdapter as Field } from '@gqlapp/forms-client-react';
 import { translate } from '@gqlapp/i18n-client-react';
 import { required, minLength, validate } from '@gqlapp/validation-common-react';
 import { Form, RenderField, Alert, Button } from '@gqlapp/look-client-react';
-import { LinkedInButton, GoogleButton, GitHubButton, FacebookButton } from '@gqlapp/authentication-client-react';
 import settings from '@gqlapp/config';
 
 const loginFormSchema = {
   usernameOrEmail: [required, minLength(3)],
   password: [required, minLength(settings.auth.password.minLength)]
 };
-const { github, facebook, linkedin, google } = settings.auth.social;
-
-const renderSocialButtons = (buttonsLength, t) => {
-  return buttonsLength > 2 ? (
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', minWidth: 200 }}>
-      {facebook.enabled && (
-        <div className="text-center">
-          <FacebookButton text={t('login.fbBtn')} type={'icon'} />
-        </div>
-      )}
-      {google.enabled && (
-        <div className="text-center">
-          <GoogleButton text={t('login.googleBtn')} type={'icon'} />
-        </div>
-      )}
-      {github.enabled && (
-        <div className="text-center">
-          <GitHubButton text={t('login.githubBtn')} type={'icon'} />
-        </div>
-      )}
-      {linkedin.enabled && (
-        <div className="text-center">
-          <LinkedInButton text={t('login.linkedinBtn')} type={'icon'} />
-        </div>
-      )}
-    </div>
-  ) : (
-    <div>
-      {facebook.enabled && (
-        <div className="text-center">
-          <FacebookButton text={t('login.fbBtn')} type={'button'} />
-        </div>
-      )}
-      {google.enabled && (
-        <div className="text-center">
-          <GoogleButton text={t('login.googleBtn')} type={'button'} />
-        </div>
-      )}
-      {github.enabled && (
-        <div className="text-center">
-          <GitHubButton text={t('login.githubBtn')} type={'button'} />
-        </div>
-      )}
-      {linkedin.enabled && (
-        <div className="text-center">
-          <LinkedInButton text={t('login.linkedinBtn')} type={'button'} />
-        </div>
-      )}
-    </div>
-  );
-};
 
 const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
-  const buttonsLength = [facebook.enabled, linkedin.enabled, google.enabled, github.enabled].filter(button => button)
-    .length;
   return (
     <Form name="login" onSubmit={handleSubmit}>
       <Field
@@ -92,7 +37,6 @@ const LoginForm = ({ handleSubmit, submitting, errors, values, t }) => {
             {t('login.form.btnSubmit')}
           </Button>
         </div>
-        {renderSocialButtons(buttonsLength, t)}
       </div>
       <div className="text-center" style={{ marginTop: 10 }}>
         <Link to="/forgot-password">{t('login.btn.forgotPass')}</Link>

@@ -1,0 +1,17 @@
+#import "./Vendor.graphql"
+
+query vendors($limit: Int!, $after: Int) {
+  vendors(limit: $limit, after: $after) {
+    totalCount
+    edges {
+      cursor
+      node {
+        ...VendorInfo
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}

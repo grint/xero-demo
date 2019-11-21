@@ -14,9 +14,7 @@ import Login from './containers/Login';
 import ForgotPassword from './containers/ForgotPassword';
 import Logout from './containers/Logout';
 import Register from './containers/Register';
-import Users from './containers/Users';
 import UserEdit from './containers/UserEdit';
-import UserAdd from './containers/UserAdd';
 
 export { default as CURRENT_USER_QUERY } from './graphql/CurrentUserQuery.graphql';
 
@@ -82,16 +80,6 @@ const AuthScreen = createStackNavigator(
   }
 );
 
-class UsersListScreen extends React.Component {
-  render() {
-    return <Users navigation={this.props.navigation} />;
-  }
-}
-
-UsersListScreen.propTypes = {
-  navigation: PropTypes.object
-};
-
 class UserEditScreen extends React.Component {
   static navigationOptions = () => ({
     title: 'Edit user'
@@ -101,18 +89,6 @@ class UserEditScreen extends React.Component {
   }
 }
 UserEditScreen.propTypes = {
-  navigation: PropTypes.object
-};
-
-class UserAddScreen extends React.Component {
-  static navigationOptions = () => ({
-    title: 'Create user'
-  });
-  render() {
-    return <UserAdd navigation={this.props.navigation} />;
-  }
-}
-UserAddScreen.propTypes = {
   navigation: PropTypes.object
 };
 
@@ -191,52 +167,6 @@ export default new ClientModule({
         },
         navigationOptions: {
           drawerLabel: <HeaderTitleWithI18n i18nKey="navLink.signIn" />
-        }
-      },
-      Users: {
-        screen: createStackNavigator({
-          Users: {
-            screen: UsersListScreen,
-            navigationOptions: ({ navigation }) => ({
-              headerTitle: <HeaderTitleWithI18n i18nKey="navLink.users" style="subTitle" />,
-              headerLeft: (
-                <IconButton iconName="menu" iconSize={32} iconColor="#0275d8" onPress={() => navigation.openDrawer()} />
-              ),
-              headerRight: (
-                <IconButton
-                  iconName="filter"
-                  iconSize={32}
-                  iconColor="#0275d8"
-                  onPress={() => {
-                    const isOpenFilter = navigation.getParam('isOpenFilter');
-                    navigation.setParams({ isOpenFilter: !isOpenFilter });
-                  }}
-                />
-              ),
-              headerForceInset: {}
-            })
-          },
-          UserEdit: {
-            screen: UserEditScreen,
-            navigationOptions: () => ({
-              headerTitle: <HeaderTitleWithI18n i18nKey="navLink.editUser" style="subTitle" />,
-              headerForceInset: {}
-            })
-          },
-          UserAdd: {
-            screen: UserAddScreen,
-            navigationOptions: () => ({
-              headerTitle: <HeaderTitleWithI18n i18nKey="navLink.editUser" style="subTitle" />,
-              headerForceInset: {}
-            })
-          }
-        }),
-        userInfo: {
-          showOnLogin: true,
-          role: 'admin'
-        },
-        navigationOptions: {
-          drawerLabel: <HeaderTitleWithI18n i18nKey="navLink.users" />
         }
       },
       Logout: {

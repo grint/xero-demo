@@ -7,7 +7,6 @@ import resolvers from './resolvers';
 import scopes from './scopes';
 import User from './sql';
 import resources from './locales';
-import social from './social';
 import password from './password';
 
 const getIdentity = (id, serial = '') => {
@@ -41,7 +40,7 @@ const middleware = app => {
   }
 };
 
-export default new ServerModule(social, password, {
+export default new ServerModule(password, {
   schema: [schema],
   appContext,
   createResolversFunc: [resolvers],

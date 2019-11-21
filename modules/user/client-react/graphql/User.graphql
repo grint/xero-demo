@@ -13,21 +13,5 @@ fragment UserInfo on User {
     certificate {
       serial
     }
-    facebook {
-      fbId
-      displayName
-    }
-    google {
-      googleId
-      displayName
-    }
-    github {
-      ghId
-      displayName
-    }
-    linkedin {
-      lnId
-      displayName
-    }
   }
 }

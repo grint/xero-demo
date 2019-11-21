@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table as RSTable } from 'reactstrap';
+import moment from 'moment';
 
 const renderHead = columns => {
   return columns.map(({ title, dataIndex, renderHeader, key }) => {
@@ -20,7 +21,12 @@ const renderBody = (columns, dataSource) => {
 
 const renderData = (columns, entry) => {
   return columns.map(({ dataIndex, render, key }) => {
-    return <td key={key}>{render ? render(entry[dataIndex], entry) : entry[dataIndex]}</td>;
+    if (isDate(entry[dataIndex])) {
+      entry[dataIndex] = moment(entry[dataIndex]).format('YYYY-MM-DD h:mm:ss a');
+    }
+    return <td key={key}>
+      {render ? render(entry[dataIndex], entry) : entry[dataIndex]}
+    </td>;
   });
 };
 
@@ -39,5 +45,11 @@ Table.propTypes = {
   dataSource: PropTypes.array,
   columns: PropTypes.array
 };
+
+const isDate = (date) => {
+  const parsedDate = Date.parse(date);
+  return isNaN(date) && !isNaN(parsedDate);
+};
+
 
 export default Table;

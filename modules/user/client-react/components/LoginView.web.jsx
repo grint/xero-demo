@@ -44,14 +44,6 @@ const LoginView = ({ onSubmit, t, isRegistered, hideModal }) => {
           <React.Fragment>
             <h1 className="text-center">{t('login.form.title')}</h1>
             <LoginForm onSubmit={onSubmit} />
-            <hr />
-            <Card>
-              <CardGroup>
-                <CardTitle>{t('login.cardTitle')}:</CardTitle>
-                <CardText>admin@example.com:admin123</CardText>
-                <CardText>user@example.com:user1234</CardText>
-              </CardGroup>
-            </Card>
           </React.Fragment>
         )}
       </LayoutCenter>

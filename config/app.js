@@ -1,5 +1,5 @@
 export default {
-  name: 'Apollo Starter Kit',
+  name: 'Xero Accounting',
   logging: {
     level: (process.env.npm_config_argv || '').search(/(watch|start)/) >= 0 ? 'debug' : 'info',
     debugSQL: false,

@@ -1,0 +1,27 @@
+{
+  "navLink": "Vendors",
+
+  "vendor": {
+    "title": "Vendor Details",
+    "meta": "Vendor details",
+    "loadMsg": "Loading...",
+    "noVendorsMsg": "There are no vendors yet.",
+    "btn": {
+      "view": "View",
+      "back": "Back"
+    }
+  },
+
+  "list": {
+    "title": "Vendors",
+    "meta": "List of vendors",
+    "column": {
+      "title": "Title",
+      "actions": "Actions"
+    },
+    "btn": {
+      "more": "Load more ..."
+    },
+    "subTitle": "Vendors List"
+  }
+}

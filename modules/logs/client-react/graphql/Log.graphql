@@ -1,0 +1,10 @@
+fragment LogInfo on Log {
+  id
+  operation
+  state
+  item
+  records
+  success
+  error
+  created_at
+}

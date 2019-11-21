@@ -60,7 +60,6 @@ export default () => ({
         const passwordHash = await createPasswordHash(input.password);
         const isActive = !settings.auth.password.requireEmailConfirmation;
         [userId] = await User.register({ ...input, isActive }, passwordHash);
-        // if user has previously logged with facebook auth
       } else {
         await User.updatePassword(emailExists.userId, input.password);
         userId = emailExists.userId;

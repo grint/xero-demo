@@ -1,7 +1,6 @@
 {
   "loading": "App is loading...",
   "navLink": {
-    "users": "Users",
     "signIn": "Sign In",
     "logout": "Log out",
     "profile": "Profile",
@@ -29,10 +28,6 @@
     "errorMsg": "Login failed!",
     "cardTitle": "Available logins",
     "notRegText": "Not registered yet?",
-    "fbBtn": "Log in with Facebook",
-    "googleBtn": "Log in with Google",
-    "githubBtn": "Log in with GitHub",
-    "linkedinBtn": "Log in with LinkedIn",
     "form": {
       "title": "Sign In",
       "field": {

@@ -1,382 +1,136 @@
-<p align="center"><a href="#"><img width="150" src="https://rawgit.com/sysgears/apollo-universal-starter-kit/master/logo.svg"></a></p>
 
-# Apollo Universal Starter Kit
-
-[![Backers on Open Collective](https://opencollective.com/apollo-universal-starter-kit/backers/badge.svg)](#backers)
-[![Sponsors on Open Collective](https://opencollective.com/apollo-universal-starter-kit/sponsors/badge.svg)](#sponsors)
-[![Join the chat at https://gitter.im/sysgears/apollo-fullstack-starter-kit](https://badges.gitter.im/sysgears/apollo-fullstack-starter-kit.svg)](https://gitter.im/sysgears/apollo-fullstack-starter-kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.com/sysgears/apollo-universal-starter-kit.svg?branch=master)](https://travis-ci.com/sysgears/apollo-universal-starter-kit)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![Twitter Follow](https://img.shields.io/twitter/follow/sysgears.svg?style=social)](https://twitter.com/sysgears)
-
-**Use [our chat] to get help or discuss general topics about Apollo Universal Starter Kit.**
-
-## Official Website
-
-Visit [apollokit.org] to learn about Apollo Universal Starter Kit. You can also test a [demo application] deployed on
-Heroku.
+# Xero Accounting Demo App
 
 ## Description
 
-![](Technologies.png)
+This is a not fully complete application that can synchronize certain types of Xero lists and store them in a local database. The application is a prototype to **demonstrate the development approach**.
 
-Apollo Universal Starter Kit is an SEO-friendly, fully configured, modular starter project for developing [Universal
-JavaScript] applications. You can use this kit to create your applications in JavaScript or TypeScript for all major
-platforms &ndash; mobile, web, and server.
+#### Rationale for the chosen principle of development
+In the assignment, the stretch goal is to use GraphQL, which I have not had to work with yet. I have considered 2 development approaches:
 
-Apollo Universal Starter Kit is built with [Apollo], [GraphQL], [React], [Angular], [React Native], [Expo], [Knex.js],
-and [Express] with support for relational databases such as PostgreSQL, MySQL, and SQLite.
+- Completely finished and ready for production use application made with well-known technologies, but with the need for further processing (taking into account the desire to use GraphQL).
+- Not completely finished application (taking into account the limited time), with the ability to learn new technology, show the level of learning in real conditions and make a goood basis for the further development.
 
-[TypeScript] is our language of choice and we use it across the entire project. However, you can freely mix vanilla
-JavaScript (the ES6 and ES7 syntax) and TypeScript when creating your modules.
+I chose the option 2, as a result of which, after about 15 hours, I was able to use GraphQL at a pretty confident level. Here I also rely on the experience of real development, according to which, all the planned technologies must be applied first - this can slow down the development at the initial stage, but eliminate the need to invest a large number of working hours in the future, which at the end turn out to success.
 
-The starter kit also integrates [Twitter Bootstrap], [Ant Design], and [NativeBase]
-to provide great possibilities for styling for your web and mobile applications.
+Thanks to this short assignment, I can show my usual way of working in conditions where it is necessary to quickly adapt to the requirements and new technologies and it is necessary to master the principles of development, a new language or architecture in the shortest possible time.
 
-## Table of Contents
+## Features
 
-* [Overview](#overview)
-    * [Why Use Apollo Universal Starter Kit](#why-use-apollo-universal-starter-kit)
-    * [Concept](#concept)
-    * [Architecture and Implemented Modules](#architecture-and-implemented-modules)
-* [Demo](#demo)
-* [Branches](#branches)
-* [First Run of Apollo Universal Starter Kit](#first-run-of-apollo-universal-starter-kit)
-* [Project Structure](#project-structure)
-* [Apollo Universal Starter Kit Documentation](#apollo-universal-starter-kit-documentation)
-* [Support](#support)
-    * [Community Support](#community-support)
-    * [Commercial Support](#commercial-support)
-* [Contributors](#contributors)
-* [Backers](#backers)
-* [Sponsors](#sponsors)
-* [License Info](#license)
+### Front-end stack
+- [React](https://facebook.github.io/react/) for UI.
+- [Apollo Client (React)](http://dev.apollodata.com/react/) for connecting to GraphQL.
+- [Sass](https://sass-lang.com/), and [PostCSS](https://postcss.org/).
+- [Twitter Bootstrap] for design and prototyping
+- [React Router](https://reacttraining.com/react-router/) for declarative browser + server routes.
+- OAuth for authorisation
+- [i18next](https://www.npmjs.com/package/i18next) for multi-language support
+- ... and many others
 
-## Overview
+### Server-side 
+- [Express](https://expressjs.com/) web server.
+- [Knex.js](http://knexjs.org/) for data management
+- [SQLite](https://www.sqlite.org/index.html) for data storage.
+- [Webpack](https://webpack.js.org/) for building
+- [TypeScript] as my language of choice to use it across the entire project. 
+- ... and many others
 
-### Why Use Apollo Universal Starter Kit
+## How to use
 
-#### I am a Developer
+### Prerequisites
+- [yarn](https://yarnpkg.com/lang/en/docs/install)
+- Node.js 6.x or higher (Node.js 10 is highly recommended)
 
-* Great productivity thanks to live reload and (partial) hot code reload
-* Fractal modular architecture that's easy to support and extend
-* The possibility to create modules in TypeScript _and_ JavaScript at the same time
-* No need to develop [typical features](#architecture-and-implemented-modules) for your applications
-
-#### I am a Project Manager
-
-* Your application will work faster thanks to GraphQL
-* Your team will be able to reuse the code for all the platforms
-* Your team can create client, server, and mobile JavaScript applications
-* Your application will be easier to support and evolve thanks to the fractal modular architecture
-* Your application will be based on a widely-used JavaScript ecosystem (it's easy to find JS developers)
-* Your team can develop new features straightaway instead of creating the basic features
-* Your application will be integrated with Stripe, one of the top payment processors
-
-### Concept
-
-Developing client-server-mobile projects in JavaScript never was a trivial task. Not only do you have to spend time
-installing the application dependencies and configuring them, but you're also constrained to implement many basic
-functionalities over and over again. And you never have time to develop a starter codebase that you can reuse across
-all of your projects.
-
-To relieve you from the burden of configuring the project, developing the application structure, and implementing
-typical features, we created Apollo Universal Starter Kit.
-
-Apollo Universal Starter Kit provides you with a client-server-mobile application that you can employ as a foundation
-for developing new web or mobile projects using popular tools from the JavaScript ecosystem. But our starter kit does so
-much more than just creating a mix of popular JS technologies &mdash; it's powered by a few **custom** libraries and
-solutions to simplify managing project configurations, creating new modules, building GraphQL queries, and perform many
-other tasks.
-
-The starter kit also consists of many modules that you can augment and adapt to develop your specific application. Also,
-you can use those prebuilt modules as a reference when implementing basic features for your applications even if you
-create them using other technologies.
-
-### Architecture and Implemented Modules
-
-Among all the approaches to building the application architecture, we opt for the _disposable fractal-based modular
-architecture_. Thanks to it, it's possible to remove any built-in module from Apollo Universal Starter Kit without
-breaking the application. We recommend that you develop your custom modules with the same idea in mind when using our
-starter kit.
-
-Apollo Universal Starter Kit comes with the following modules:
-
-* **Authentication**. Authentication via social networks (Facebook, GitHub, LinkedIn, and Google using OAuth) and
-password-based authentication; refreshing a forgotten password
-* **Authorization**. Permission-based authorization with various user roles
-* **Contact Us Form**. Functionality to send messages to the server
-* **Internationalization**. A complete internationalization solution for the client and server
-* **Mobile Chat**. A live chat based on the [React Native Gifted Chat] and powered by GraphQL subscriptions
-* **Pagination**. Navigation between pages and presentation of entities
-* **Payments**. Functionality for recurring payments based on Stripe
-* **Posts and Comments**. Functionality to add, delete, and update posts and comments
-* **State Management**. The application state stored in the database and on the client using different approaches
-* **404 Not Found Page**. A minimalistic module for handling 404 requests
-
-If you don't want to use the pre-built modules in your project, you can remove them using a [dedicated CLI]. For module
-names, see the names of directories under `modules`.
-
-To learn more about the features and modules available in Apollo Universal Starter Kit, follow to the dedicated section
-[Features and Modules].
-
-## Demo
-
-Here's a demo of Apollo Universal Starter Kit in action:
-
-![screencast](https://user-images.githubusercontent.com/1259926/27387579-c6799ada-56a1-11e7-93fc-d08e9970640d.gif)
-
-You can try out the latest version of Apollo Universal Starter Kit [deployed on Heroku]. If you want to see the mobile
-React Native application in action, check out [this demo on Expo.io].
-
-## Branches
-
-| Branch       | Description                                                         |
-| ------------ | ------------------------------------------------------------------- |
-| [stable]     | The latest stable version of the kit (recommended)                  |
-| [master]     | The kit version with the latest features. May not work consistently |
-| [single]     | A single-package Apollo v2 version of the kit                       |
-| [apollo1]    | The Apollo v1 version of the kit                                    |
-| [cli-crud]   | This kit version features a CLI to generate CRUD implementations    |
-
-## First Run of Apollo Universal Starter Kit
-
-Verify if you use Node.js 6.x or higher (Node.js ^10 is recommended) before running the starter kit.
-
-1. Clone the stable branch of Apollo Universal Starter Kit.
-
+### Quick start
 ```
-git clone -b stable https://github.com/sysgears/apollo-universal-starter-kit.git
-cd apollo-universal-starter-kit
-```
-
-**NOTE**: The master branch is not recommended for development. Use it at your own risk.
-
-**NOTE**: If you're going to use Windows to develop with Apollo Universal Starter Kit, you need to additionally enable
-symlinks _before_ you run the project.
-
-For Windows 10:
-
-* Press `Win` + `I` to open **Settings**
-* Click **Update & Security**
-* Click the **For Developers** tab
-* In the **Use developer features** window, switch to **Developer Mode**
-
-**NOTE**: You can remove the unnecessary stacks from Apollo Universal Starter Kit by using the CLI. Consult a
-[respective CLI section]. Alternatively, you can use the capabilities of your operating system. For example, by running
-the command below, you can remove all Scala server files:
-
-```bash
-find -name server-scala | xargs rm -rf
-```
-
-If you don't need the ready-made modules, you can also remove them using the [custom CLI].
-
-2. Install the dependencies. Make sure that you use Yarn 1.0.0 or higher.
-
-```
+cd project_folder
 yarn
-```
-
-You can use NPM instead of Yarn to handle the starter kit dependencies and to run scripts. Throughout the Apollo
-Universal Starter Kit documentation, we'll always use Yarn.
-
-3. Seed sample data to the database. The command below will create new tables with sample data in SQLite:
-
-```
-yarn seed
-```
-
-SQLite is a typical default relational database installed in most Linux distributions including Mac OS X; otherwise,
-consult [SQLite installation guide].
-
-4. Run the starter kit in development mode:
-
-```
 yarn watch
 ```
+or
 
+```
+cd project_folder
+yarn build
+yarn start
+```
 The server application will be running on [http://localhost:3000], while the client application will be running on
-[http://localhost:8080]. The terminal will tell your the exact ports.
+[http://localhost:8080]. 
 
-For more information about running this starter kit for mobile development or Docker, consult the [Getting Started]
-guide.
+## Design Patterns
+To select the appropriate pattern, I answered to the question "What problem am I trying to solve?". In the task of the data synchronization with the possible introduction of new types of lists, I see the following problems:
 
-## Project Structure
+- it should be possible to receive lists from various enpoints of various types (Account, Vendor) with a different structure (Created date, Due date), i.e. the same construction process should be able to create different representations. In other words, by creation of a list, the process of its creation is not important, but the result is. Factory design pattern will do the job well.
+
+- it should be possible to synchronize all the lists used in the system, i.e. there's a need of an easier or simpler interface to work with. In other words, when one clicks the "sync" button, the user does not need to synchronize each list individually and write logs, instead, the application must complete everything what is necessary. Facade pattern can solve this problem.
+
+So, the combination of Factory and Facade pattern should be used. Factory will create lists of any type and the facade will provide a common interface for syncing.
+
+Also, when synchronizing the list, data flows through a sequence of steps, which can be described by a simple algorithm:
+- send a Xero request to the selected endpoint,
+- get an answer,
+- evaluate the status of the response
+- if successful, save data to the database
+- if necessary, process the data (depending on the type and design of the database)
+- create a log entry
+
+This process is a non-linear pipeline. In terms of GoF patterns, this process can be described as a combination of strategy and builder pattern. This will let to choose a model of behavior depending on the status of the response.
+
+
+### Database
+
+The initial database choice was MongoDB 4.0, the choice of which is justified below. But for the purpose of more practice with SQL and also considering that the application is a demonstration of the development approach, I settled on SQLite. This speeds up development at the initial stage and speeds up testing.
+
+In production however, there are reasons to choose MongoDB:
+
+The format of the data received from Xero is not the same, for example, the Accounts list can have a CurrencyCode field if it is a bank account, or Bank Transactions has a Reference field for SPEND and RECEIVE transactions. There are also country-dependend fields like "Narrative" for UK. Therefore, the data is not structured in the same way.
+
+The application receives data in JSON format, which will let to immediately insert new documents without processing them, because NoSQL is a very good fit for hierarchical data storage in the form of key-value pairs. In the case of SQL, due to the presence of many links to additional lists like TaxType or Class, it would be necessary to split the data into several entities in order to avoid denormalization, and to write to several tables - this is the additional operations that can be avoided with NoSQL. Also, since Xero is the source of truth, the best solution is to avoid any data transformation, during which there is a risk of making changes.
+
+Although the requirements for the application stated that we probably don’t need the entire set of properties it has, there is always the possibility of changing requirements or expanding the application, which will lead to the need for significant changes to the design of the database. In the case of saving all the data, we can only show what is needed at the moment, and, if necessary, display new fields easily and quickly. Since NoSQL is easily scalable, in the case of a significant increase in the number of users and, accordingly, data, it is easy to scale.
+
+An additional advantage of an unstructured data format is the ability to create a data-driven application.
+
+As we are talking about accounting, an important aspect is the security and safety of data transfer. Despite the fact that at the moment the application only shows data, the possibility of making a decision on expanding the functionality and providing users with the opportunity to edit data is not excluded. In this case, ACID compliance is a must and SQL is a great choice, but since version 4 MongoDB also supports Multi-Document ACID Transactions, which makes the both ways a good fit.
+
+NoSQL it is not a good option to manipulate complex queries, but in this application the most operations will be simple CRUD operations that do not require complex calculations, therefore, there is no need to support them.
+
+## Architecture and Implemented Modules
+
+### Project Structure
 
 The project structure presents generally accepted guidelines and patterns for building scalable web and mobile
-applications.
-
-The structure is _fractal_ meaning the available functionality is grouped primarily by feature rather than by file type.
-But the current structure isn't prescriptive, and you can change it however you like.
+applications.The  functionality is grouped primarily by feature rather than by file type.
 
 ```
-apollo-universal-starter-kit
 ├── config                      # Various application configurations
-├── docs                        # Documentation
-├── node_modules                # Global Node.js modules
-├── modules                     # All the prebuilt project modules
-├── packages                    # Available packages
-│   ├── client                  # React client
-│   ├── client-angular          # Angular client
-│   ├── client-vue              # Vue client
+├── modules                     # All the  project modules
+├── packages                    # Aakages
+│   ├── client                  # React UI
 │   ├── common                  # Common code
-│   ├── mobile                  # React Native mobile client
+│   ├── mobile                  # React Native 
 │   ├── server                  # Node.js and Express server
-│   └── server-scala            # Scala server
-└── tools                       # All build and CLI-related files
 ```
 
-Inside `modules`, you'll find all the prebuilt modules that Apollo Universal Starter Kit comes with. Each module under
-`modules` contains sub-directories with module implementations for different technologies. For example, if you look up
-the module `modules/core`, you'll see the following sub-modules:
-
+Inside `modules`, you'll find all the  modules that are used for accomplishing the task. 
 ```
-apollo-universal-starter-kit
 ├── modules                       # Available packages
-│   ├── core                      # The core module
-│       ├── client-angular        # Core functionality for Angular app
-│       ├── client-react          # Core functionality for React app
-│       ├── client-react-native   # Core functionality for React Native app
-│       ├── client-vue            # Core functionality for Vue app
-│       ├── common                # React Native mobile client
-│       ├── server-scala          # Core functionality for Scala server
-│       └── server-ts             # Core functionality for Express server
-└── tools                         # All build and CLI-related files
+│   ├── vendor                    # The core module
+│   │   ├── client                # Core functionality for React app
+│   │   └── server-ts             # Core functionality for Express server
 ```
 
+```
+├── vendor                        # Vendor package
+│   ├── client                    # The client module of the package
+│   │   ├── components            # Can be also called "View" part of MVC
+│   │   ├── containers            # Can be also called "Controllers" part of MVC
+│   │   ├── graphql               # GraphQL types, queries, subscriptions and mutations
+│   │   └── locales               # English & Russian translations
+│   ├── server-ts                 # The server module of the package
+│   │   ├── migrations            # Database schemas
+│   │   ├── seeds                 # Demo data for quick demonstartion and testing
+│   │   ├── resolvers.ts          # GraphQL resolvers
+│   │   └── schema.graphql        # GraphQL types, queries, subscriptions and mutations
 
-## Apollo Universal Starter Kit Documentation
-
-Follow to the documentation concerning different aspects of how to run, configure, and develop with Apollo Universal
-Starter Kit.
-
-* [Getting Started]
-    * [Installing and Running Apollo Universal Starter Kit]
-    * [Running the Mobile App with Expo]
-    * [Running the Starter Kit in a Mobile Simulator]
-* [Running Apollo Universal Starter Kit with Docker]
-* [Deploying Apollo Universal Starter Kit to Production]
-* [Configuring Apollo Universal Starter Kit]
-* [Features and Modules]
-* [Writing Code]
-* [Debugging Code]
-* [Available Scripts]
-* [Frequently Asked Questions]
-* [Project Structure]
-* [Importing Modules]
-
-Tools
-
-* [Apollo Universal Starter Kit CLI]
-
-Modules
-
-* [Stripe Payments]
-* [Mobile Chat]
-
-## Support
-
-### Community Support
-
-* [Gitter channel] &ndash; ask questions, find answers, and participate in general discussions
-* [GitHub issues] &ndash; submit issues and send feature requests
-* [Wiki] &ndash; read documentation for the usage scenarios of the starter kit; edit the documentation
-* [FAQ] &ndash; consult the Frequently Asked Questions section
-
-### Commercial Support
-
-The [SysGears] team provides comprehensive support for commercial partners. Our team can guide you when you're using
-Apollo Universal Starter Kit to build your application.
-
-You can contact us via [Skype] or email [info@sysgears.com](mailto:info@sysgears.com).
-
-## Contributors
-
-Thanks a lot to all the wonderful people who contributed to Apollo Universal Starter Kit!
-
-<a href="https://github.com/sysgears/apollo-universal-starter-kit/graphs/contributors">
-    <img src="https://opencollective.com/apollo-universal-starter-kit/contributors.svg?width=890" />
-</a>
-
-## Backers
-
-Thanks a lot to all our backers!
-
-<a href="https://opencollective.com/apollo-universal-starter-kit#backers" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/backers.svg?width=890"></a>
-
-## Sponsors
-
-You can support this project by becoming a sponsor! Your logo will show up here with a link to your website.
-
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/0/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/1/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/2/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/3/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/4/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/5/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/6/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/7/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/8/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/apollo-universal-starter-kit/sponsor/9/website" target="_blank"><img src="https://opencollective.com/apollo-universal-starter-kit/sponsor/9/avatar.svg"></a>
-
-## License
-
-Copyright &copy; 2016-2019 [SysGears (Cyprus) Limited]. This source code is licensed under the [MIT] license.
-
-[our chat]: https://gitter.im/sysgears/apollo-fullstack-starter-kit
-[mit]: LICENSE
-[universal javascript]: https://medium.com/@mjackson/universal-javascript-4761051b7ae9
-[apollo]: http://www.apollostack.com
-[graphql]: http://graphql.org
-[jwt]: https://jwt.io
-[react]: https://reactjs.org/
-[angular]: https://angular.io/
-[react native]: https://facebook.github.io/react-native/
-[expo]: https://expo.io/
-[knex.js]: http://knexjs.org
-[express]: http://expressjs.com
-[typescript]: https://www.typescriptlang.org/
-[twitter bootstrap]: http://getbootstrap.com
-[ant design]: https://ant.design
-[nativebase]: https://nativebase.io
-[apollokit.org]: https://apollokit.org
-[demo application]: https://apollo-universal-starter-kit.herokuapp.com
-[react native gifted chat]: https://github.com/FaridSafi/react-native-gifted-chat
-[deployed on heroku]: https://apollo-universal-starter-kit.herokuapp.com
-[this demo on Expo.io]: https://expo.io/@sysgears/apollo-universal-starter-kit
-[stable]: https://github.com/sysgears/apollo-universal-starter-kit/tree/stable
-[master]: https://github.com/sysgears/apollo-universal-starter-kit/tree/master
-[single]: https://github.com/sysgears/apollo-universal-starter-kit/tree/single
-[apollo1]: https://github.com/sysgears/apollo-universal-starter-kit/tree/apollo1
-[cli-crud]: https://github.com/sysgears/apollo-universal-starter-kit/tree/cli-crud
-[custom cli]: https://github.com/sysgears/apollo-universal-starter-kit/tree/cli-crud
-[sqlite installation guide]: http://www.sqlitetutorial.net/download-install-sqlite/
-[http://localhost:3000]: http://localhost:3000
-[http://localhost:8080]: http://localhost:8080
-[getting started]: /docs/Getting%20Started.md
-[installing and running apollo universal starter kit]: /docs/Getting%20Started.md#installing-and-running-apollo-universal-starter-kit
-[running the mobile app with expo]: /docs/Getting%20Started.md#running-the-mobile-app-with-expo
-[running the starter kit in a mobile simulator]: /docs/Getting%20Started.md#running-the-starter-kit-in-a-mobile-simulator
-[running apollo universal starter kit with docker]: /docs/Docker.md
-[deploying apollo universal starter kit to production]: /docs/Deployment.md
-[configuring apollo universal starter kit]: /docs/Configuration.md
-[dedicated cli]: /docs/tools/CLI.md#deleting-features-with-deletemodule
-[respective cli section]: /docs/tools/CLI.md#selecting-the-technology-stack-with-choosestack
-[features and modules]: /docs/Features%20and%20Modules.md
-[writing code]: /docs/Writing%20Code.md
-[debugging code]: /docs/Debugging.md
-[apollo universal starter kit cli]: /docs/tools/CLI.md
-[available scripts]: /docs/Yarn%20Scripts.md
-[stripe payments]: /docs/modules/Stripe%20Subscription.md
-[mobile chat]: /docs/modules/Mobile%20Chat.md
-[project structure]: /docs/Project%20Structure.md
-[importing modules]: /docs/Importing%20Modules.md
-[frequently asked questions]: /docs/FAQ.md
-[sysgears (cyprus) limited]: http://sysgears.com
-[gitter channel]: https://gitter.im/sysgears/apollo-fullstack-starter-kit
-[github issues]: https://github.com/sysgears/apollo-universal-starter-kit/issues
-[wiki]: https://github.com/sysgears/apollo-universal-starter-kit/wiki
-[faq]: /docs/FAQ.md
-[sysgears]: https://sysgears.com
-[skype]: http://hatscripts.com/addskype?sysgears
+```

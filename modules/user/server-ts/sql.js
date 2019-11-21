@@ -16,23 +16,11 @@ class User {
         'u.email as email',
         'up.first_name as first_name',
         'up.last_name as last_name',
-        'ca.serial',
-        'fa.fb_id',
-        'fa.display_name AS fbDisplayName',
-        'lna.ln_id',
-        'lna.display_name AS lnDisplayName',
-        'gha.gh_id',
-        'gha.display_name AS ghDisplayName',
-        'ga.google_id',
-        'ga.display_name AS googleDisplayName'
+        'ca.serial'
       )
       .from('user AS u')
       .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
-      .leftJoin('auth_certificate AS ca', 'ca.user_id', 'u.id')
-      .leftJoin('auth_facebook AS fa', 'fa.user_id', 'u.id')
-      .leftJoin('auth_google AS ga', 'ga.user_id', 'u.id')
-      .leftJoin('auth_github AS gha', 'gha.user_id', 'u.id')
-      .leftJoin('auth_linkedin AS lna', 'lna.user_id', 'u.id');
+      .leftJoin('auth_certificate AS ca', 'ca.user_id', 'u.id');
 
     // add order by
     if (orderBy && orderBy.column) {
@@ -83,23 +71,11 @@ class User {
           'u.email',
           'up.first_name',
           'up.last_name',
-          'ca.serial',
-          'fa.fb_id',
-          'fa.display_name AS fbDisplayName',
-          'lna.ln_id',
-          'lna.display_name AS lnDisplayName',
-          'gha.gh_id',
-          'gha.display_name AS ghDisplayName',
-          'ga.google_id',
-          'ga.display_name AS googleDisplayName'
+          'ca.serial'
         )
         .from('user AS u')
         .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
         .leftJoin('auth_certificate AS ca', 'ca.user_id', 'u.id')
-        .leftJoin('auth_facebook AS fa', 'fa.user_id', 'u.id')
-        .leftJoin('auth_google AS ga', 'ga.user_id', 'u.id')
-        .leftJoin('auth_github AS gha', 'gha.user_id', 'u.id')
-        .leftJoin('auth_linkedin AS lna', 'lna.user_id', 'u.id')
         .where('u.id', '=', id)
         .first()
     );
@@ -141,22 +117,6 @@ class User {
     return knex('user')
       .returning('id')
       .insert(decamelizeKeys({ username, email, role, passwordHash, isActive }));
-  }
-
-  createFacebookAuth({ id, displayName, userId }) {
-    return returnId(knex('auth_facebook')).insert({ fb_id: id, display_name: displayName, user_id: userId });
-  }
-
-  createGithubAuth({ id, displayName, userId }) {
-    return returnId(knex('auth_github')).insert({ gh_id: id, display_name: displayName, user_id: userId });
-  }
-
-  createGoogleOAuth({ id, displayName, userId }) {
-    return returnId(knex('auth_google')).insert({ google_id: id, display_name: displayName, user_id: userId });
-  }
-
-  createLinkedInAuth({ id, displayName, userId }) {
-    return returnId(knex('auth_linkedin')).insert({ ln_id: id, display_name: displayName, user_id: userId });
   }
 
   editUser({ id, username, email, role, isActive }, passwordHash) {
@@ -240,98 +200,6 @@ class User {
         .from('user AS u')
         .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
         .where({ email })
-        .first()
-    );
-  }
-
-  async getUserByFbIdOrEmail(id, email) {
-    return camelizeKeys(
-      await knex
-        .select(
-          'u.id',
-          'u.username',
-          'u.role',
-          'u.is_active',
-          'fa.fb_id',
-          'u.email',
-          'u.password_hash',
-          'up.first_name',
-          'up.last_name'
-        )
-        .from('user AS u')
-        .leftJoin('auth_facebook AS fa', 'fa.user_id', 'u.id')
-        .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
-        .where('fa.fb_id', '=', id)
-        .orWhere('u.email', '=', email)
-        .first()
-    );
-  }
-
-  async getUserByLnInIdOrEmail(id, email) {
-    return camelizeKeys(
-      await knex
-        .select(
-          'u.id',
-          'u.username',
-          'u.role',
-          'u.is_active',
-          'lna.ln_id',
-          'u.email',
-          'u.password_hash',
-          'up.first_name',
-          'up.last_name'
-        )
-        .from('user AS u')
-        .leftJoin('auth_linkedin AS lna', 'lna.user_id', 'u.id')
-        .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
-        .where('lna.ln_id', '=', id)
-        .orWhere('u.email', '=', email)
-        .first()
-    );
-  }
-
-  async getUserByGHIdOrEmail(id, email) {
-    return camelizeKeys(
-      await knex
-        .select(
-          'u.id',
-          'u.username',
-          'u.role',
-          'u.is_active',
-          'gha.gh_id',
-          'u.email',
-          'u.password_hash',
-          'up.first_name',
-          'up.last_name'
-        )
-        .from('user AS u')
-        .leftJoin('auth_github AS gha', 'gha.user_id', 'u.id')
-        .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
-        .where('gha.gh_id', '=', id)
-        .orWhere('u.email', '=', email)
-        .first()
-    );
-  }
-
-  async getUserByGoogleIdOrEmail(id, email) {
-    return camelizeKeys(
-      await knex
-        .select(
-          'u.id',
-          'u.username',
-          'u.role',
-          'u.is_active',
-          'ga.google_id',
-          'u.email',
-          'u.password_hash',
-          'up.first_name',
-          'up.last_name'
-        )
-        .from('user AS u')
-        .leftJoin('auth_google AS ga', 'ga.user_id', 'u.id')
-        .leftJoin('user_profile AS up', 'up.user_id', 'u.id')
-        .where('ga.google_id', '=', id)
-        .orWhere('u.email', '=', email)
         .first()
     );
   }

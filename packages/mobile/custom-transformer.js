@@ -28,7 +28,6 @@ const transform = ({ src, filename, options }) => {
 const cacheKeyParts = [
   process.env.API_URL,
   process.env.WEBSITE_URL,
-  process.env.STRIPE_PUBLIC_KEY,
   metroTransformer.getCacheKey()
 ];
 
