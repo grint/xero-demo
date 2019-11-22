@@ -43,11 +43,19 @@ Thanks to this short assignment, I can show my usual way of working in condition
 - [yarn](https://yarnpkg.com/lang/en/docs/install)
 - Node.js 6.x or higher (Node.js 10 is highly recommended)
 
-### Quick start
+### Quick start on Ubuntu
+```
+git clone https://github.com/grint/xero-demo.git
+cd xero-demo
+sudo sh install.sh
+```
+##### Or start manually
+
 ```
 git clone https://github.com/grint/xero-demo.git
 cd xero-demo
 yarn
+yarn migrate
 yarn watch
 ```
 or
@@ -56,6 +64,7 @@ or
 git clone https://github.com/grint/xero-demo.git
 cd xero-demo
 yarn build
+yarn migrate
 yarn start
 ```
 The server application will be running on [http://localhost:3000], while the client application will be running on
